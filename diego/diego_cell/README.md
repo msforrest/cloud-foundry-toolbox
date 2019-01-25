@@ -66,7 +66,6 @@ _Enter diego_cell load threshold (ex. 8.00):_
 
 Temporary Directory: /tmp/tmp.yoidfFBRnx
 
-
 [INFO] Collecting load info from diego_cell VMs with load[1m] higher than 0.12...
 0.39 >= 0.12
 0.17 >= 0.12
