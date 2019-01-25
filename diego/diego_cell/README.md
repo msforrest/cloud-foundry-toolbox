@@ -51,6 +51,7 @@
 	BOSH_GW_USER
 	BOSH_GW_HOST
 ```
+##### Example:
 
 ```
 $ ./diego-log-collect.sh -X
