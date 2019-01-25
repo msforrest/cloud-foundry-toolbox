@@ -1,11 +1,11 @@
-diego_cell log collect scripts
+## diego_cell log collect scripts
 
-diego-log-collect.sh
-####################
+diego-log-collect.sh 
 
-Usage: 
+### Usage: 
 
-  Ex: ./cell_load.sh -X
+```
+./cell_load.sh -X
 
   -X (Optional) Include diego_cell process and BOSH Agent logs
 
@@ -48,10 +48,4 @@ Usage:
 	BOSH_GW_PRIVATE_KEY
 	BOSH_GW_USER
 	BOSH_GW_HOST
-
-BOSH JOB logs for diego_cells with high load
-BOSH AGENT logs for diego_cells with high load
-bosh instances --details
-bosh vms --vitals
-bosh deployments list
-diego_database BOSH JOB logs
+```
