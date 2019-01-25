@@ -85,9 +85,7 @@ Succeeded
 [INFO] Downloading BOSH AGENT logs for: diego_cell/0ee6797d-934c-4fb1-9e16-e183b8e22e78
 Using environment '10.193.78.11' as user 'admin' (bosh.*.read, openid, bosh.*.admin, bosh.read, bosh.admin)
 Using deployment 'cf-b8a0cd3a767cd0eeca66'
-Task 34714
 Task 34714 | 22:58:09 | Fetching logs for diego_cell/0ee6797d-934c-4fb1-9e16-e183b8e22e78 (1): Finding and packing log files (00:00:01)
-Task 34714 done
 Downloading resource '1312c907-e454-4978-7bf9-db239a8f8d0e' to '/tmp/tmp.yoidfFBRnx/agent-diego_cell-0ee6797d-934c-4fb1-9e16-e183b8e22e78/cf-b8a0cd3a767cd0eeca66.diego_cell.0ee6797d-934c-4fb1-9e16-e183b8e22e78-20190124-225810-892956273.tgz'...
 Succeeded
 Cleaning up root_log / monit / and process files copied to job log dir (which are pulled along with 'bosh logs' command)
