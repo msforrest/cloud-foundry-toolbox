@@ -7,7 +7,7 @@
 ##### Usage: 
 
 ```
-./cell_load.sh -X
+./diego-log-collect.sh -X
 
   -X (Optional) Include diego_cell process and BOSH Agent logs
 
@@ -56,8 +56,8 @@
 ```
 $ ./diego-log-collect.sh -X
 
-_Enter diego_cell load threshold (ex. 8.00):_
-0.12
+Enter diego_cell load threshold (ex. 8.00):
+5.00
 
 [INFO]Retrieving deployment and job info...
  - collecting 'bosh deployment'
@@ -66,11 +66,11 @@ _Enter diego_cell load threshold (ex. 8.00):_
 
 Temporary Directory: /tmp/tmp.yoidfFBRnx
 
-[INFO] Collecting load info from diego_cell VMs with load[1m] higher than 0.12...
-0.39 >= 0.12
-0.17 >= 0.12
+[INFO] Collecting load info from diego_cell VMs with load[1m] higher than 5...
+8.39 >= 5.00
+5.17 >= 5.00
 
-[INFO] There are 2 diego_cell with load above 0.12
+[INFO] There are 2 diego_cell with load above 5
 
 [INFO] Capturing system stats for: diego_cell/0ee6797d-934c-4fb1-9e16-e183b8e22e78
 Using environment '10.193.78.11' as user 'admin' (bosh.*.read, openid, bosh.*.admin, bosh.read, bosh.admin)
