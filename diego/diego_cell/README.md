@@ -1,9 +1,8 @@
 ## diego_cell log collect scripts
----
 
 
 
-diego-log-collect.sh 
+**_diego-log-collect.sh_** 
 
 ##### Usage: 
 
