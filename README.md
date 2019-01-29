@@ -93,7 +93,7 @@ Select BOSH Job(s) using their number (again to uncheck, ENTER when done):
 ##### Example:
 
 ```
-$ ./cf-log-collect.sh 
+$ ./cf-log-collect.sh -X
 
 Temporary Directory: /tmp/tmp.JJ08ryfdfV
 
