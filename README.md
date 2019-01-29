@@ -188,3 +188,57 @@ https://securefiles.pivotal.io/dropzone/customer-service/<ticket_number>
 
 [INFO]...cleaning up local files in tempdir: /tmp/tmp.JJ08ryfdfV
 ```
+
+##### output file structure:
+```
+$ ls
+2019-01-29-17-46-36-piv-support-logs.tar.gz
+
+$ tar -zxvf 2019-01-29-17-46-36-piv-support-logs.tar.gz
+
+$ ls -R
+2019-01-29-17-46-36-piv-support-logs.tar.gz			    diego_brain-09131c43-f438-4fb0-a8ed-68d6821d46fd-agent  diego_cell-ce6a04ea-33f1-4e01-9ed6-f42470242ed7
+bosh_job_details						    diego_cell-0ee6797d-934c-4fb1-9e16-e183b8e22e78	    diego_cell-ce6a04ea-33f1-4e01-9ed6-f42470242ed7-agent
+cloud_controller_worker-bf10105a-6850-443c-ad99-d886cf2e3afc	    diego_cell-0ee6797d-934c-4fb1-9e16-e183b8e22e78-agent   diego_database-f16a141f-7907-4373-a3cd-d72e7dd874d3
+cloud_controller_worker-bf10105a-6850-443c-ad99-d886cf2e3afc-agent  diego_cell-2dd25c9c-72f0-40a4-9ac7-23687084ca5f	    diego_database-f16a141f-7907-4373-a3cd-d72e7dd874d3-agent
+diego_brain-09131c43-f438-4fb0-a8ed-68d6821d46fd		    diego_cell-2dd25c9c-72f0-40a4-9ac7-23687084ca5f-agent
+
+./bosh_job_details:
+bosh_all_job_file.out  bosh_job_file.out  deployments  instances.details  vms.vitals
+
+./cloud_controller_worker-bf10105a-6850-443c-ad99-d886cf2e3afc:
+cf-b8a0cd3a767cd0eeca66.cloud_controller_worker.bf10105a-6850-443c-ad99-d886cf2e3afc-20190129-174751-717750175.tgz
+
+./cloud_controller_worker-bf10105a-6850-443c-ad99-d886cf2e3afc-agent:
+cf-b8a0cd3a767cd0eeca66.cloud_controller_worker.bf10105a-6850-443c-ad99-d886cf2e3afc-20190129-174753-674894661.tgz
+
+./diego_brain-09131c43-f438-4fb0-a8ed-68d6821d46fd:
+cf-b8a0cd3a767cd0eeca66.diego_brain.09131c43-f438-4fb0-a8ed-68d6821d46fd-20190129-174809-095494493.tgz
+
+./diego_brain-09131c43-f438-4fb0-a8ed-68d6821d46fd-agent:
+cf-b8a0cd3a767cd0eeca66.diego_brain.09131c43-f438-4fb0-a8ed-68d6821d46fd-20190129-174811-017851908.tgz
+
+./diego_cell-0ee6797d-934c-4fb1-9e16-e183b8e22e78:
+cf-b8a0cd3a767cd0eeca66.diego_cell.0ee6797d-934c-4fb1-9e16-e183b8e22e78-20190129-174832-220617827.tgz
+
+./diego_cell-0ee6797d-934c-4fb1-9e16-e183b8e22e78-agent:
+cf-b8a0cd3a767cd0eeca66.diego_cell.0ee6797d-934c-4fb1-9e16-e183b8e22e78-20190129-174836-717830796.tgz
+
+./diego_cell-2dd25c9c-72f0-40a4-9ac7-23687084ca5f:
+cf-b8a0cd3a767cd0eeca66.diego_cell.2dd25c9c-72f0-40a4-9ac7-23687084ca5f-20190129-174855-643732869.tgz
+
+./diego_cell-2dd25c9c-72f0-40a4-9ac7-23687084ca5f-agent:
+cf-b8a0cd3a767cd0eeca66.diego_cell.2dd25c9c-72f0-40a4-9ac7-23687084ca5f-20190129-174859-423470844.tgz
+
+./diego_cell-ce6a04ea-33f1-4e01-9ed6-f42470242ed7:
+cf-b8a0cd3a767cd0eeca66.diego_cell.ce6a04ea-33f1-4e01-9ed6-f42470242ed7-20190129-174923-367925392.tgz
+
+./diego_cell-ce6a04ea-33f1-4e01-9ed6-f42470242ed7-agent:
+cf-b8a0cd3a767cd0eeca66.diego_cell.ce6a04ea-33f1-4e01-9ed6-f42470242ed7-20190129-174927-318983361.tgz
+
+./diego_database-f16a141f-7907-4373-a3cd-d72e7dd874d3:
+cf-b8a0cd3a767cd0eeca66.diego_database.f16a141f-7907-4373-a3cd-d72e7dd874d3-20190129-174945-600166513.tgz
+
+./diego_database-f16a141f-7907-4373-a3cd-d72e7dd874d3-agent:
+cf-b8a0cd3a767cd0eeca66.diego_database.f16a141f-7907-4373-a3cd-d72e7dd874d3-20190129-174947-840695098.tgz
+```
