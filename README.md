@@ -80,7 +80,8 @@ Usage:
 	[ ] 26) tcp_router/fdaed2e4-d5f2-444e-808e-1a8a96db96e8
 	[ ] 27) uaa/09c15325-cd2f-4311-bc8b-3824ca7d21bd
 
-	Select BOSH Job(s) using their number (again to uncheck, ENTER when done): 
+Select BOSH Job(s) using their number (again to uncheck, ENTER when done): 
+
 	BOSH Jobs selected:
 		cloud_controller_worker/bf10105a-6850-443c-ad99-d886cf2e3afc
 		diego_brain/09131c43-f438-4fb0-a8ed-68d6821d46fd
@@ -134,13 +135,14 @@ Jobs in deployment: cf-b8a0cd3a767cd0eeca66
         [ ] 26) tcp_router/fdaed2e4-d5f2-444e-808e-1a8a96db96e8
         [ ] 27) uaa/09c15325-cd2f-4311-bc8b-3824ca7d21bd
 Select BOSH Job(s) using their number (again to uncheck, ENTER when done):
+
 	BOSH Jobs selected:
-	cloud_controller_worker/bf10105a-6850-443c-ad99-d886cf2e3afc
-	diego_brain/09131c43-f438-4fb0-a8ed-68d6821d46fd
-	diego_cell/0ee6797d-934c-4fb1-9e16-e183b8e22e78
-	diego_cell/2dd25c9c-72f0-40a4-9ac7-23687084ca5f
-	diego_cell/ce6a04ea-33f1-4e01-9ed6-f42470242ed7
-	diego_database/f16a141f-7907-4373-a3cd-d72e7dd874d3
+		cloud_controller_worker/bf10105a-6850-443c-ad99-d886cf2e3afc
+		diego_brain/09131c43-f438-4fb0-a8ed-68d6821d46fd
+		diego_cell/0ee6797d-934c-4fb1-9e16-e183b8e22e78
+		diego_cell/2dd25c9c-72f0-40a4-9ac7-23687084ca5f
+		diego_cell/ce6a04ea-33f1-4e01-9ed6-f42470242ed7
+		diego_database/f16a141f-7907-4373-a3cd-d72e7dd874d3
 
 [INFO] Capturing system stats for: diego_cell/0ee6797d-934c-4fb1-9e16-e183b8e22e78
 [INFO] Flag '-X' used; will also collect AGENT and process logs
