@@ -1,7 +1,7 @@
-## BOSH log collect scripts
+## cloud-foundry-toolbox
 
 
-
+#### BOSH log collect script - generic menu based cf-log-collect
 **_cf-log-collect.sh_** 
 
 ##### Usage: 
