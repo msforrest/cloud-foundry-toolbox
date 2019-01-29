@@ -37,7 +37,7 @@
 		- df -h
 		- iptables --list
 
-  The output directory is your current working director: /home/ubuntu/mforrest/diego_cell/lab_diego_cell
+  The output directory is your current working directory: /home/ubuntu/mforrest/diego_cell/lab_diego_cell
 
   This tool requires the bosh v2 cli and the following environment variables to be set:
 	BOSH_ENVIRONMENT
