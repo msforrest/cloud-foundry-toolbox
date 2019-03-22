@@ -1,7 +1,9 @@
 ## cloud-foundry-toolbox
 
-#### BOSH log collect script - generic menu based cf-log-collect
+#### quick bash scripts to collect services information via cf cli
 
+
+**_cf-redis-service-list_v1.sh_**
 ##### Usage:
 _./cf-redis-service-list_v1.sh_
 
