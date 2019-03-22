@@ -21,6 +21,6 @@ Service     Service_Plan     Service_Name     #_bound_apps     Bound Application
 -------     ------------     ------------     ------------     --------------------     ------------     -----     -----------
 p-redis     shared-vm        redis-for-kafka  0                                         klahti           test      3
 p-redis     shared-vm        testlog          0                                         test             test      2
-p.redis     cache-large      redis-test       2                test-app                 mforrest          redis     14
-                                                               cf-nodejs                mforrest          redis     14
+p.redis     cache-large      redis-test       2                test-app                 mforrest         redis     14
+                                                               cf-nodejs                mforrest         redis     14
 ```
