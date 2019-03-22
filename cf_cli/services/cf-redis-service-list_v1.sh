@@ -11,12 +11,14 @@ validate_environment() {
 
 case $1 in
 -h|--h|help|-help|--help|-h|\?|-\?|--\? )
-	echo  "Usage: ./cf-service-list.sh"
+	echo  "Usage: ./cf-redis-service-list_v1.sh"
 	echo
-	echo  "cf-service-list.sh will obtain all Service Instances (SI)'s that have been"
+	echo  "cf-redis-service-list_v1.sh will obtain all Service Instances (SI)'s that have been"
 	echo  "created by a redis service broker and list the associated service broker,"
 	echo  "service plan, Service Instance (SI) name, # of bound apps and app names (if any)"
 	echo  "age of each Service Instance (SI), and the ORG/Space to which they belong"
+	echo  
+	echo  "requires: jq, cf cli, bc"
 	echo
 	exit 0
 esac
