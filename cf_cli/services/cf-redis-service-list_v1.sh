@@ -43,7 +43,7 @@ NC='\033[0m' # No Color
 VERSION="(build 1)"
 
 if [[ $1 == "-v" || $1 == "-version" || $1 == "--version" ]]; then
-	echo -e "cf-service-list ${BOLD}${VERSION}${RESET}"
+	echo -e "cf-redis-service-list_v1.sh ${BOLD}${VERSION}${RESET}"
 	exit 0
 fi
 
