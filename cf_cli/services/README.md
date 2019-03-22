@@ -1,10 +1,9 @@
 ## cloud-foundry-toolbox
 
 #### BOSH log collect script - generic menu based cf-log-collect
-**_./cf-redis-service-list_v1.sh_**
 
 ##### Usage:
-./cf-redis-service-list_v1.sh
+_./cf-redis-service-list_v1.sh_
 
 cf-redis-service-list_v1.sh will obtain all Service Instances (SI)'s that have been
 created by a redis service broker and list the associated service broker,
