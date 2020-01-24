@@ -21,18 +21,19 @@ function usage(){
 	2. bosh instances --details
 	3. bosh vms --vitals 
 	4. bosh deployments list
+	5. bosh releases
   
   If using -X flag the following logs will also be collected for each selected instance:
 	1. BOSH Agent logs
 	2. /var/vcap/data/root_log/* (sysstat/kernel logs..etc)
 	3. /var/vcap/monit/monit.log
 	4. Instance:
-		- ps auxwf; pstree -panl; ps -eLo pid,tid,ppid,user:11,comm,state,wchan
+		- ps auxwf; pstree -panl; ps -eLo pid,tid,ppid,user:11,comm,state,wchan, ps -ef, top -b -n 3, 
 		- ifconfig
 		- free -h; df -h
 		- vmstat -S M 1 3; iostat -txm 1 3; netstat -ntlp; netstat -aW 
 		- lsblk -a g
-		- iptables --list
+		- iptables --list, arp, arp -a, ip neigh, route, lsof -nPi TCP, lsof -i
 
   The output directory is your current working director: ${output_dir}
 
@@ -83,7 +84,6 @@ function usage(){
 		diego_cell/0ee6797d-934c-4fb1-9e16-e183b8e22e78
 		diego_cell/2dd25c9c-72f0-40a4-9ac7-23687084ca5f
 		diego_cell/ce6a04ea-33f1-4e01-9ed6-f42470242ed7
-
   "
   exit 1
 }
@@ -119,6 +119,8 @@ function get_vm_and_deployments_info() {
   $bosh --tty instances --details &> "${tempdir}/bosh_job_details/instances.details"
   echo -e " - collecting 'bosh vms --vitals'\n"
   $bosh --tty vms --vitals &> "${tempdir}/bosh_job_details/vms.vitals"
+  echo -e " - collecting 'bosh releases'\n"
+  $bosh --tty releases &> "${tempdir}/bosh_job_details/bosh_releases.out"
   total_bosh_jobs=$(cat ${tempdir}/bosh_job_details/bosh_all_job_file.out | wc -l)
   if cat ${tempdir}/bosh_job_details/bosh_all_job_file.out | grep -qv running; then cat ${tempdir}/bosh_job_details/bosh_all_job_file.out | grep -v running > ${tempdir}/bosh_job_details/failing_instances.out; not_running=$(cat ${tempdir}/bosh_job_details/failing_instances.out | wc -l); echo -e "${MAGENTA_BOLD}[WARNING]${RESET} There are ${not_running} instances not running\n"; while IFS='' read -r line || [[ -n "$line" ]]; do instance_state=$(echo $line | awk {'print $2'});instance_name=$(echo $line | awk {'print $1'}); echo -e "instance ${instance_name} is in state: ${instance_state}.."; done < ${tempdir}/bosh_job_details/failing_instances.out; else echo -e "${BOLD}[INFO]${RESET} All jobs are in running state\n"; echo -e "${BOLD}[INFO]${RESET} There are ${total_bosh_jobs} jobs in deployment ${BOSH_DEPLOYMENT}\n"; fi
 }
@@ -137,7 +139,7 @@ echo -e "${BOLD}[INFO]${RESET} Flag '-X' used; will also collect AGENT and proce
 	mkdir -p ${tempdir}/${job}
 	mkdir -p ${tempdir}/${job_agent}
 	echo -e "${BOLD}[INFO]${RESET} Capturing system stats for: ${BLUE_BOLD}${node}${RESET}\n"
-	$bosh -d $BOSH_DEPLOYMENT ssh ${node} 'sudo su -c "mkdir -p /var/vcap/sys/log/diag; cp /var/vcap/monit/monit.log* /var/vcap/sys/log/diag; tar -zcf /var/vcap/sys/log/diag/root_log.tgz /var/vcap/data/root_log/; ps -eLo pid,tid,ppid,user:11,comm,state,wchan > /var/vcap/sys/log/diag/ps-elo-state.log; ps -auxwf > /var/vcap/sys/log/diag/ps-auxwf.log; ps -ef > /var/vcap/sys/log/diag/ps-ef.log; top -b -n 3 > /var/vcap/sys/log/diag/top-b-n-3.log; ifconfig > /var/vcap/sys/log/diag/ifconfig.log; free -h > /var/vcap/sys/log/diag/free.log; pstree -panl > /var/vcap/sys/log/diag/pstree-panl.log; vmstat -S M 1 3 > /var/vcap/sys/log/diag/vmstat.log; iostat -txm 1 3 > /var/vcap/sys/log/diag/iostat.log; df -h > /var/vcap/sys/log/diag/df.log; lsblk -a > /var/vcap/sys/log/diag/lsblk.log; lsof -nPi TCP > /var/vcap/sys/log/diag/tcp.log; netstat -ntlp > /var/vcap/sys/log/diag/netstat.log; iptables --list > /var/vcap/sys/log/diag/iptables.log; netstat -aW > /var/vcap/sys/log/diag/netstat-aw.log"' 2>/dev/null 
+	$bosh -d $BOSH_DEPLOYMENT ssh ${node} 'sudo su -c "mkdir -p /var/vcap/sys/log/diag; cp /var/vcap/monit/monit.log* /var/vcap/sys/log/diag; tar -zcf /var/vcap/sys/log/diag/root_log.tgz /var/vcap/data/root_log/; ps -eLo pid,tid,ppid,user:11,comm,state,wchan > /var/vcap/sys/log/diag/ps-elo-state.log; ps -auxwf > /var/vcap/sys/log/diag/ps-auxwf.log; ps -ef > /var/vcap/sys/log/diag/ps-ef.log; top -b -n 3 > /var/vcap/sys/log/diag/top-b-n-3.log; ifconfig > /var/vcap/sys/log/diag/ifconfig.log; free -h > /var/vcap/sys/log/diag/free.log; pstree -panl > /var/vcap/sys/log/diag/pstree-panl.log; vmstat -S M 1 3 > /var/vcap/sys/log/diag/vmstat.log; iostat -txm 1 3 > /var/vcap/sys/log/diag/iostat.log; df -h > /var/vcap/sys/log/diag/df.log; lsblk -a > /var/vcap/sys/log/diag/lsblk.log; lsof -nPi TCP > /var/vcap/sys/log/diag/tcp.log; lsof -i 4 > /var/vcap/sys/log/diag/lsof_i.log; ip neigh > /var/vcap/sys/log/diag/ip_neigh.log; arp > /var/vcap/sys/log/diag/arp.log; arp -a > /var/vcap/sys/log/diag/arp_a.log; route > /var/vcap/sys/log/diag/route.log; netstat -ntlp > /var/vcap/sys/log/diag/netstat.log; iptables --list > /var/vcap/sys/log/diag/iptables.log; netstat -aW > /var/vcap/sys/log/diag/netstat-aw.log"' 2>/dev/null 
 	echo -e "${BOLD}[INFO]${RESET} Downloading BOSH JOB logs for job: ${BLUE_BOLD}${node}${RESET}\n"
 	$bosh logs ${node} --dir="${tempdir}/${job}"
 	echo -e "${BOLD}[INFO]${RESET} Downloading BOSH AGENT logs for: ${BLUE_BOLD}${node}${RESET}\n"
@@ -191,6 +193,7 @@ for i in ${!options[@]}; do
     [[ "${choices[i]}" ]] && { printf " %s\n" "${options[i]}"; msg=""; } | sed 's/"//g'  | tr -d " " >> ${tempdir}/bosh_job_details/bosh_job_file.out
     [[ "${choices[i]}" ]] && { printf " %s\n" "${options[i]}"; msg=""; } | sed 's/"//g'  | tr -d " "
 done
+echo
 download_job_logs
 }
 
