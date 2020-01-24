@@ -18,24 +18,18 @@ Usage:
 	2. bosh instances --details
 	3. bosh vms --vitals 
 	4. bosh deployments list
+	5. bosh releases
   
   If using -X flag the following logs will also be collected for each selected instance:
 	1. BOSH Agent logs
 	2. /var/vcap/data/root_log/* (sysstat/kernel logs..etc)
 	3. /var/vcap/monit/monit.log
 	4. Instance:
-		- ps -eLo pid,tid,ppid,user:11,comm,state,wchan
-		- ps auxwf
-		- pstree -panl
-		- ifconfig
-		- free -h
-		- vmstat -S M 1 3
-		- iostat -txm 1 3
-		- netstat -ntlp
-		- netstat -aW
+		- ps auxwf; pstree -panl; ps -eLo pid,tid,ppid,user:11,comm,state,wchan, ps -ef, top -b -n 3, 
+		- free -h; df -h
+		- vmstat -S M 1 3; iostat -txm 1 3; netstat -ntlp; netstat -aW 
 		- lsblk -a g
-		- df -h
-		- iptables --list
+		- iptables --list, arp, arp -a, ip neigh, route, lsof -nPi TCP, lsof -i, ifconfig
 
   The output directory is your current working director: /home/ubuntu/mforrest/diego_cell/lab_diego_cell
 
