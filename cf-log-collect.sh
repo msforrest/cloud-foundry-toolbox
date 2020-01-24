@@ -112,7 +112,7 @@ RESET="\033[0m"
 function get_vm_and_deployments_info() {
   echo -e "${GREEN}Temporary Directory: ${RESET}${tempdir}\n"
   echo -e "${BOLD}[INFO]${RESET} Retrieving deployment and job info for deployment: ${BLUE_BOLD}$BOSH_DEPLOYMENT${RESET}..."
-  $bosh -d $BOSH_DEPLOYMENT instances --column=Instance --column=Process_State  > ${tempdir}/bosh_job_details/bosh_all_job_file.out
+  $bosh -e $BOSH_ENVIRONMENT -d $BOSH_DEPLOYMENT instances --column=Instance --column=Process_State  > ${tempdir}/bosh_job_details/bosh_all_job_file.out
   echo -e " - collecting 'bosh deployment'"
   $bosh --tty deployments &> "${tempdir}/bosh_job_details/deployments"
   echo -e " - collecting 'bosh instance --details'"
@@ -139,13 +139,13 @@ echo -e "${BOLD}[INFO]${RESET} Flag '-X' used; will also collect AGENT and proce
 	mkdir -p ${tempdir}/${job}
 	mkdir -p ${tempdir}/${job_agent}
 	echo -e "${BOLD}[INFO]${RESET} Capturing system stats for: ${BLUE_BOLD}${node}${RESET}\n"
-	$bosh -d $BOSH_DEPLOYMENT ssh ${node} 'sudo su -c "mkdir -p /var/vcap/sys/log/diag; cp /var/vcap/monit/monit.log* /var/vcap/sys/log/diag; tar -zcf /var/vcap/sys/log/diag/root_log.tgz /var/vcap/data/root_log/; ps -eLo pid,tid,ppid,user:11,comm,state,wchan > /var/vcap/sys/log/diag/ps-elo-state.log; ps -auxwf > /var/vcap/sys/log/diag/ps-auxwf.log; ps -ef > /var/vcap/sys/log/diag/ps-ef.log; top -b -n 3 > /var/vcap/sys/log/diag/top-b-n-3.log; ifconfig > /var/vcap/sys/log/diag/ifconfig.log; free -h > /var/vcap/sys/log/diag/free.log; pstree -panl > /var/vcap/sys/log/diag/pstree-panl.log; vmstat -S M 1 3 > /var/vcap/sys/log/diag/vmstat.log; iostat -txm 1 3 > /var/vcap/sys/log/diag/iostat.log; df -h > /var/vcap/sys/log/diag/df.log; lsblk -a > /var/vcap/sys/log/diag/lsblk.log; lsof -nPi TCP > /var/vcap/sys/log/diag/tcp.log; lsof -i 4 > /var/vcap/sys/log/diag/lsof_i.log; ip neigh > /var/vcap/sys/log/diag/ip_neigh.log; arp > /var/vcap/sys/log/diag/arp.log; arp -a > /var/vcap/sys/log/diag/arp_a.log; route > /var/vcap/sys/log/diag/route.log; netstat -ntlp > /var/vcap/sys/log/diag/netstat.log; iptables --list > /var/vcap/sys/log/diag/iptables.log; netstat -aW > /var/vcap/sys/log/diag/netstat-aw.log"' 2>/dev/null 
+	$bosh -e $BOSH_ENVIRONMENT -d $BOSH_DEPLOYMENT ssh ${node} 'sudo su -c "mkdir -p /var/vcap/sys/log/diag; cp /var/vcap/monit/monit.log* /var/vcap/sys/log/diag; tar -zcf /var/vcap/sys/log/diag/root_log.tgz /var/vcap/data/root_log/; ps -eLo pid,tid,ppid,user:11,comm,state,wchan > /var/vcap/sys/log/diag/ps-elo-state.log; ps -auxwf > /var/vcap/sys/log/diag/ps-auxwf.log; ps -ef > /var/vcap/sys/log/diag/ps-ef.log; top -b -n 3 > /var/vcap/sys/log/diag/top-b-n-3.log; ifconfig > /var/vcap/sys/log/diag/ifconfig.log; free -h > /var/vcap/sys/log/diag/free.log; pstree -panl > /var/vcap/sys/log/diag/pstree-panl.log; vmstat -S M 1 3 > /var/vcap/sys/log/diag/vmstat.log; iostat -txm 1 3 > /var/vcap/sys/log/diag/iostat.log; df -h > /var/vcap/sys/log/diag/df.log; lsblk -a > /var/vcap/sys/log/diag/lsblk.log; lsof -nPi TCP > /var/vcap/sys/log/diag/tcp.log; lsof -i 4 > /var/vcap/sys/log/diag/lsof_i.log; ip neigh > /var/vcap/sys/log/diag/ip_neigh.log; arp > /var/vcap/sys/log/diag/arp.log; arp -a > /var/vcap/sys/log/diag/arp_a.log; route > /var/vcap/sys/log/diag/route.log; netstat -ntlp > /var/vcap/sys/log/diag/netstat.log; iptables --list > /var/vcap/sys/log/diag/iptables.log; netstat -aW > /var/vcap/sys/log/diag/netstat-aw.log"' 2>/dev/null 
 	echo -e "${BOLD}[INFO]${RESET} Downloading BOSH JOB logs for job: ${BLUE_BOLD}${node}${RESET}\n"
 	$bosh logs ${node} --dir="${tempdir}/${job}"
 	echo -e "${BOLD}[INFO]${RESET} Downloading BOSH AGENT logs for: ${BLUE_BOLD}${node}${RESET}\n"
 	$bosh logs --agent ${node} --dir="${tempdir}/${job_agent}"
 	echo -e "Cleaning up root_log / monit / and process files copied to job log dir (which are pulled along with 'bosh logs' command)\n"
-	$bosh -d $BOSH_DEPLOYMENT ssh ${node} 'sudo su -c "rm -r /var/vcap/sys/log/diag/"'
+	$bosh -e $BOSH_ENVIRONMENT -d $BOSH_DEPLOYMENT ssh ${node} 'sudo su -c "rm -r /var/vcap/sys/log/diag/"'
   done
   fi
 
@@ -180,7 +180,7 @@ function cleanup() {
   rm -r "${tempdir}"
 }
 
-options=($(bosh -d $BOSH_DEPLOYMENT instances --vitals --column=Instance | grep -v Instance | sed 's/[[:space:]]//g' | sed 's/\(.*\)/"\1"/g' | paste -s -d" ")) 
+options=($(bosh -e $BOSH_ENVIRONMENT -d $BOSH_DEPLOYMENT instances --vitals --column=Instance | grep -v Instance | sed 's/[[:space:]]//g' | sed 's/\(.*\)/"\1"/g' | paste -s -d" ")) 
 
 ERROR=" "
 #Clear screen for menu
