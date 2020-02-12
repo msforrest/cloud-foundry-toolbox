@@ -1,7 +1,6 @@
 
 ## diego_cell log collect script 
-[collect diego_cell logs for all cells which have a 5 min load average equal to or above entered value]
-
+[collect diego_cell logs for all cells which have a 1 min load average equal to or above entered value]
 
 
 **_diego-log-collect.sh_** 
