@@ -1,4 +1,4 @@
-## diego_cell log collect scripts
+## diego_cell log collect scripts by entering in a cell load value
 
 
 
@@ -8,6 +8,8 @@
 
 ```
 ./diego-log-collect.sh -X
+
+[collect diego_cell logs for all cells which have a 5 min load average equal to or above entered value]
 
   -X (Optional) Include diego_cell process and BOSH Agent logs
 
