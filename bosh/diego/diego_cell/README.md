@@ -1,4 +1,6 @@
-## diego_cell log collect scripts by entering in a cell load value
+
+## diego_cell log collect script 
+[collect diego_cell logs for all cells which have a 5 min load average equal to or above entered value]
 
 
 
